@@ -11,5 +11,6 @@ data class User(
     @Json(name = "email")
     val email: String = "",
     @Json(name = "avatar")
-    val avatar: String = ""
+    val avatar: String = "",
+    val isLogged: Boolean = false
 )

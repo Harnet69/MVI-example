@@ -40,6 +40,12 @@ class MainActivity: AppCompatActivity() {
                 mainViewModel.userIntent.send(MainIntent.FetchUser)
             }
         }
+
+        buttonLogIn.setOnClickListener {
+            lifecycleScope.launch {
+                mainViewModel.userIntent.send(MainIntent.LogIn)
+            }
+        }
     }
 
 
@@ -75,6 +81,13 @@ class MainActivity: AppCompatActivity() {
                     is MainState.Idle -> {
 
                     }
+
+                    is MainState.Logged -> {
+                        Toast.makeText(applicationContext, "You are logged in", Toast.LENGTH_LONG).show()
+                        buttonLogIn.visibility = View.GONE
+                        textLogIn.text = "Logged"
+                    }
+
                     is MainState.Loading -> {
                         buttonFetchUser.visibility = View.GONE
                         progressBar.visibility = View.VISIBLE
@@ -85,6 +98,7 @@ class MainActivity: AppCompatActivity() {
                         buttonFetchUser.visibility = View.GONE
                         renderList(it.user)
                     }
+
                     is MainState.Error -> {
                         progressBar.visibility = View.GONE
                         buttonFetchUser.visibility = View.VISIBLE

@@ -29,6 +29,7 @@ class MainViewModel( private val repository: MainRepository) : ViewModel()  {
             userIntent.consumeAsFlow().collect {
                 when (it) {
                     is MainIntent.FetchUser -> fetchUser()
+                    is MainIntent.LogIn -> logIn()
                 }
             }
         }
@@ -43,5 +44,10 @@ class MainViewModel( private val repository: MainRepository) : ViewModel()  {
                 MainState.Error(e.localizedMessage)
             }
         }
+    }
+
+    private fun logIn() {
+        _state.value = MainState.Logged
+        println("Try to log in")
     }
 }

@@ -6,6 +6,7 @@ import com.vikk.mviexapmle.data.model.User
     Each state can be loaded on to the view by the user intents
  */
 sealed class MainState{
+    object Logged : MainState()
     object Idle : MainState()
     object Loading : MainState()
     data class Users(val user: List<User>) : MainState()
